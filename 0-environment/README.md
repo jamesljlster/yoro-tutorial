@@ -89,11 +89,11 @@
 
         Magma:
 
-            Ubuntu:
+        -   Ubuntu:
 
-                請參考<http://icl.cs.utk.edu/magma/software/>
+              請參考<http://icl.cs.utk.edu/magma/software/>
 
-            Manjaro:
+        -   Manjaro:
 
             ```bash
             sudo pacman -S magma
@@ -109,6 +109,13 @@
 
         git submodule sync
         git submodule update --init --recursive --depth 1
+        ```
+
+        如果需要，安裝並指定相容於 CUDA 安裝版本的編譯器：
+
+        ```bash
+        export CC=$(which gcc-9)
+        export CXX=$(which g++-9)
         ```
 
         編譯及安裝：
