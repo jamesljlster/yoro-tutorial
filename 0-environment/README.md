@@ -46,6 +46,7 @@
     cd ~/api/yoro_deploy
     ```
 
+
 2.  建立 Python 虛擬環境
 
     ```bash
@@ -53,6 +54,7 @@
     source venv/bin/activate
     pip install --upgrade pip
     ```
+
 
 3.  預先安裝 PyTorch (視環境狀況而定)
 
@@ -71,6 +73,7 @@
 
     pip install . # -v for verbose
     ```
+
 
 5.  測試環境
 
