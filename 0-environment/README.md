@@ -20,6 +20,11 @@
     sudo apt install g++
     ```
 
+-   CUDA Toolkit:
+
+    需要與後續 PyTorch 安裝版本所對應的一致：  
+    <https://developer.nvidia.com/CUDA-TOOLKIT-ARCHIVE>
+
 -   CMake > 3.17:
 
     安裝方法請參考：<https://apt.kitware.com/>
