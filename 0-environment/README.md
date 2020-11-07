@@ -45,13 +45,18 @@
 
 ### 環境建置
 
+> 註1：建議 Manjaro 使用者直接使用 Native 環境，
+> 使用 pacman 安裝 python-pytorch-opt-cuda 套件，
+> 並直接跳到第 4 步驟。
+
+> 註2：請不要使用 sudo 執行任何 pip 指令！！
+
 1.  選定安裝位置
 
     ```bash
     mkdir -p ~/api/yoro_deploy
     cd ~/api/yoro_deploy
     ```
-
 
 2.  建立 Python 虛擬環境
 
@@ -61,7 +66,6 @@
     pip install --upgrade pip
     ```
 
-
 3.  預先安裝 PyTorch (視環境狀況而定)
 
     免此步驟的環境：
@@ -70,6 +74,48 @@
 
     -   Manjaro
 
+    此步驟需要在 Python 虛擬環境中執行，可參考官方作法：  
+    <https://github.com/pytorch/pytorch>
+
+    1.  安裝相依套件
+
+        共同相依套件：
+
+        ```bash
+        pip install \
+            numpy ninja pyyaml mkl mkl-include setuptools cffi \
+            typing-extensions future six requests dataclasses
+        ```
+
+        Magma:
+
+            Ubuntu:
+
+                請參考<http://icl.cs.utk.edu/magma/software/>
+
+            Manjaro:
+
+            ```bash
+            sudo pacman -S magma
+            ```
+
+    2.  編譯、安裝 PyTorch
+
+        使用 Git Clone 指定版本的 PyTorch 專案，在此以 v1.7.0 為例：
+
+        ```bash
+        git clone --depth 1 --branch v1.7.0 https://github.com/pytorch/pytorch.git
+        cd pytorch
+
+        git submodule sync
+        git submodule update --init --recursive --depth 1
+        ```
+
+        編譯及安裝：
+
+        ```bash
+        pip install . # -v for verbose
+        ```
 
 4.  編譯、安裝套件
 
@@ -79,7 +125,6 @@
 
     pip install . # -v for verbose
     ```
-
 
 5.  測試環境
 
