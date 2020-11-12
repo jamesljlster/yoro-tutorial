@@ -45,7 +45,7 @@
 
 ### 環境建置
 
-> 註1：建議 Manjaro 使用者直接使用 Native 環境，
+> 註1：Manjaro 使用者可直接使用 Native 環境，
 > 使用 pacman 安裝 python-pytorch-opt-cuda 套件，
 > 並直接跳到第 4 步驟。
 
@@ -104,6 +104,8 @@
         使用 Git Clone 指定版本的 PyTorch 專案，在此以 v1.7.0 為例：
 
         ```bash
+        cd ~/api/yoro_deploy  # 回到工作根目錄
+
         git clone --depth 1 --branch v1.7.0 https://github.com/pytorch/pytorch.git
         cd pytorch
 
@@ -121,20 +123,48 @@
         編譯及安裝：
 
         ```bash
-        pip install . # -v for verbose
+        pip install .  # -v for verbose
         ```
 
-4.  編譯、安裝套件
+        或是使用以下方法，當編譯失敗之後不需要重頭編譯，
+        但需要保留 pytorch 專案資料夾：
+
+        ```bash
+        python setup.py build
+        python setup.py install
+        ```
+
+    3.  安裝 Torchvisiion
+
+        使用 Git Clone 指定版本的 Torchvision 專案，在此以 v0.8.1 為例：
+
+        ```bash
+        cd ~/api/yoro_deploy  # 回到工作根目錄
+
+        git clone --depth 1 --branch v0.8.1 https://github.com/pytorch/vision
+        cd vision
+        ```
+
+        編譯安裝套件：
+
+        ```bash
+        pip install .  # -v for verbose
+        ```
+
+4.  編譯、安裝 YORO 套件
 
     ```bash
+    cd ~/api/yoro_deploy  # 回到工作根目錄
+
     git clone git@gitlab.ical.tw:jamesljlster/yoro.git
     cd yoro
 
-    pip install . # -v for verbose
+    pip install .  # -v for verbose
     ```
 
 5.  測試環境
 
     ```bash
-    python -c "import yoro"
+    cd ~                     # 離開 YORO 套件目錄
+    python -c "import yoro"  # 測試載入套件是否會出現異常狀況
     ```
