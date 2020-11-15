@@ -68,7 +68,7 @@
 
 3.  預先安裝 PyTorch (視環境狀況而定)
 
-    如果依照官方<https://pytorch.org/>指示安裝完 PyTorch，
+    如果依照官網 <https://pytorch.org/> 指示安裝完 PyTorch，
     並依照第 4、5 步驟安裝、測試 YORO API 之後不會出現任何錯誤，
     則可以跳過手動編譯安裝的部份。
 
