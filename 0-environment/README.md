@@ -68,11 +68,9 @@
 
 3.  預先安裝 PyTorch (視環境狀況而定)
 
-    免此步驟的環境：
-
-    需要此步驟的環境：
-
-    -   Manjaro
+    如果依照官方<https://pytorch.org/>指示安裝完 PyTorch，
+    並依照第 4、5 步驟安裝、測試 YORO API 之後不會出現任何錯誤，
+    則可以跳過手動編譯安裝的部份。
 
     此步驟需要在 Python 虛擬環境中執行，可參考官方作法：  
     <https://github.com/pytorch/pytorch>
