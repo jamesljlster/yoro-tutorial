@@ -8,3 +8,6 @@ CMakeFiles
 
 # Exported compile commands
 compile_commands.json
+
+# Python cache
+__pycache__

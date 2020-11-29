@@ -1,0 +1,41 @@
+mode: yoro
+
+name: coating
+device: auto
+construct:
+  width: 224
+  height: 224
+  anchor:
+    - [42.48, 45.48]
+    - [46.14, 34.85]
+  deg_min: -180
+  deg_max: 180
+  deg_part_size: 10
+  backbone:
+    name: 'demo_backbone.DemoFCN'
+    args: {}
+
+train_param:
+  max_epoch: 30000
+  esti_epoch: 100
+  bak_epoch: 1000
+  batch: 16
+  num_workers: 8
+  optimizer:
+    name: Adam
+    args: {}
+
+dataset:
+  names_file: ~/dataset/coating/coating.names
+  train_dir: ~/dataset/coating/train
+  valid_dir: ~/dataset/coating/valid
+
+transform:
+  brightness: 0.3
+  contrast: 0.3
+  saturation: 0.3
+  hue: 0.1
+  degrees: 30
+  translate: [0.3, 0.3]
+  scale: [0.7, 1.3]
+  apply_on_valid: false
