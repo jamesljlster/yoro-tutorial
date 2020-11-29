@@ -31,17 +31,8 @@
 
 -   OpenCV > 4.0:
 
-    Ubuntu 環境需要手動安裝，可至實驗室公用FTP下載對應版本：  
-    <ftp://icalpublic@140.127.205.190/DevelopTools/API/OpenCV/4.5.0>
-
-    或是自己編譯：  
-    <https://gitlab.ical.tw/jamesljlster/cv-build>
-
-    安裝方法：  
-
-    ```bash
-    sudo apt install --fix-broken ./libopencv4-4.5.0-dev.deb
-    ```
+    編譯安裝方法請參考：  
+    <https://docs.opencv.org/4.5.0/d7/d9f/tutorial_linux_install.html>
 
 ### 環境建置
 
