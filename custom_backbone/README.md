@@ -21,6 +21,25 @@ trainer 在讀取設定檔時，會自動將當前執行目錄加入 Python Path
 因此自訂的 Backbone 可以不需要實際安裝到環境中，
 只需要在模組目錄中執行訓練即可。
 
-### 角度偵測器
+> 注意：自訂的 Backbone 需要相容於 TorchScript，否則會無法順利匯出模型。
 
-### YORO
+### 範例簡介
+
+- `demo_backbone.py`   
+  此檔案內含自訂的 CNN 與 FCN 網路（基於 AlexNet 修改而來），
+  僅提供 Demo 用途，不建議真的拿來當 Backbone。
+
+- `yoro_custom_bbone.yaml`  
+  使用 demo_backbone 模組自訂的 FCN 網路作為 Backbone 訓練 YORO 模型：
+
+  ```bash
+  trainer ./yoro_custom_bbone.yaml
+  ```
+
+- `rotanc_custom_bbone.yaml`  
+  使用 demo_backbone 模組自訂的 CNN 網路作為 Backbone，
+  訓練使用 Anchor 為編碼方式的角度偵測器：
+
+  ```bash
+  trainer rotanc_custom_bbone.yaml
+  ```
