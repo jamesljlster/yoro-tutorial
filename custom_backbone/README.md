@@ -12,7 +12,7 @@
 ```yaml
 construct:
   backbone:
-    name: 'torchvision.models.resnet18  # Backbone 物件完整路徑
+    name: 'torchvision.models.resnet18'  # Backbone 物件完整路徑
     args: {num_classes: 20}  # 初始化參數，需要依據指定的物件自訂，無法通用
 ```
 
