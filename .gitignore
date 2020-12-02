@@ -11,3 +11,8 @@ compile_commands.json
 
 # Python cache
 __pycache__
+
+# Model and backup files
+*.backup
+*.sdict
+*.zip
