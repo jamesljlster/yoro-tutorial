@@ -2,6 +2,11 @@
 
 此章節將介紹資料集準備的部份。
 
+在此提供範例資料集以供參考：
+
+-   [coating 旋轉物件資料集](https://drive.google.com/file/d/1FBhiYQWKvWbFCb3NXIB5D8G7X6xrV0XX/view?usp=sharing)
+-   [PlateShelf 旋轉角度資料集](https://drive.google.com/file/d/13KLxya8XHXKYWKNs-0ybg0xYtW50wXSq/view?usp=sharing)
+
 ### 資料集格式
 
 YORO 專案採用的資料標記模式為一張影像搭配一個標注檔，
