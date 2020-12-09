@@ -4,9 +4,9 @@
 
 ### 資料集格式
 
-YORO專案採用的資料標記模式為一張影像搭配一個標注檔，
-檔案名稱為`完整影像名稱.mark`，檔案內容使用YAML格式。  
-標注檔以列表方式紀錄所有物件的Ground Truth，
+YORO 專案採用的資料標記模式為一張影像搭配一個標注檔，
+檔案名稱為`完整影像名稱.mark`，檔案內容使用 YAML 格式。  
+標注檔以列表方式紀錄所有物件的 Ground Truth，
 若檔案內容為空，則整張影像將視為沒有物件的背景影像。
 
 標記欄位：
@@ -20,8 +20,8 @@ YORO專案採用的資料標記模式為一張影像搭配一個標注檔，
 
 標注範例：
 
-一張含有2個不同物件的影像，檔案名稱為 `foo.jpg`，
-標注檔案名稱與內容如下：
+一張含有2個不同物件的影像，且檔案名稱為 `foo.jpg`，
+則標注檔案名稱與內容範例如下：
 
 `foo.jpg.mark`
 
@@ -40,7 +40,86 @@ YORO專案採用的資料標記模式為一張影像搭配一個標注檔，
   h: 120.85490095921293
 ```
 
-### 資料標記程式
+另外，一個資料集會搭配一個類別名稱檔案，內容依然使用 YAML 格式，
+如：  
 
-使用 ican_mark 搭配鍵盤與滑鼠標記資料：  
+`data.names`
+
+```yaml
+- person
+- cat
+- dog
+```
+
+### 準備資料標記程式
+
+ican_mark 提供搭配鍵盤與滑鼠標記資料的功能：  
 <https://github.com/jamesljlster/ican_mark>
+
+相依套件：
+
+-   Qt5: <https://www.qt.io/>
+-   yaml-cpp: <https://github.com/jbeder/yaml-cpp>
+
+編譯套件：
+
+```bash
+git clone https://github.com/jamesljlster/ican_mark.git
+cd ican_mark
+
+mkdir build && cd build
+cmake ..
+cmake --build . --target install
+```
+
+編譯完成後，ican_mark 執行檔預設會安裝於 build/install/bin 目錄下。
+
+### 標記資料
+
+首先蒐集訓練即驗證影像資料，並為自己的資料集準備好類別名稱列表，
+在此以 coating 資料集作為範例。
+
+建議資料集目錄結構：
+
+    coating
+      ├── coating.names
+      ├── train
+      │     ├── CamToolbox_20200121_153827.jpg
+      │     ├── CamToolbox_20200121_153829.jpg
+      │     ├── ...
+      │
+      └── valid
+            ├── CamToolbox_20200121_153830.jpg
+            ├── CamToolbox_20200121_153843.jpg
+            ├── ...
+
+其中 `coating.names` 的內容為：
+
+```yaml
+- PlateShelf
+- CoatingBar
+```
+
+執行 ical_mark，
+點擊 Dataset Folder: Open Directory 與 Names: Open File 選擇影像資料夾以及類別列表檔案：
+
+<img width="650" src=".assets/ican_mark.png" />
+
+標記方式為使用滑鼠左鍵點擊 4 次決定一個選轉物件框，
+前 2 點決定角度，後 2 點決定方框。  
+標記的類別以 Names 列表中選擇的項目決定。
+
+詳細操作方式：
+
+-   滑鼠
+    -   使用左鍵標記
+    -   使用滾輪縮放影像
+    -   壓著中鍵拖曳影像
+-   鍵盤
+    -   WASD 可移動影像
+    -   ESC 可重設視窗 Focus 元件，當發現快速鍵無法使用時按下去就對了
+    -   R 可回到上一步的標記動作
+    -   Backspace 可直接清除目前未完成的標記
+    -   Up, Down, Shift 可更換標記的類別
+    -   Left, Right, Space 可切換標記影像
+    -   Z 可將目前的影像縮放至符合視野
