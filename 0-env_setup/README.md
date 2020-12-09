@@ -147,7 +147,7 @@
     ```bash
     cd ~/api/yoro_deploy  # 回到工作根目錄
 
-    git clone git@gitlab.ical.tw:jamesljlster/yoro.git
+    git clone https://github.com/jamesljlster/yoro.git
     cd yoro
 
     pip install .  # -v for verbose
