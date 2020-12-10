@@ -12,6 +12,18 @@ python export_yoro_dir.py  # 將 yoro_api_DIR 環境變數寫入 ~/.bashrc
 source ~/.bashrc           # 重新載入 ~/.bashrc
 ```
 
+##### 編譯範例檔案
+
+在終端機中切換至此 README.md 所在的資料夾，並執行：
+
+```bash
+mkdir build && cd build
+cmake ..
+cmake --build . --target install
+```
+
+編譯好的範例執行檔會出現在 install 資料夾中。
+
 ##### CMake 整合
 
 這部份可能需要一些 CMake 的先備知識。
