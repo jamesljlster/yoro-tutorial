@@ -36,4 +36,6 @@ source ~/.bashrc           # 重新載入 ~/.bashrc
     target_link_libraries(my_program yoro_api ${OpenCV_LIBS})
     ```
 
+##### 載入 YORO Detector
+
 ### Python API
