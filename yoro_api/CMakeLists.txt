@@ -7,34 +7,38 @@ if(" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
         )
 endif()
 
-# Set variables
-set(PROJECT_NAME yoro-tutorial)
-set(PROJECT_LANGUAGE CXX)
-
-# Environment variables
+# Default installation path
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Installation directory")
 
-set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Build configure")
-if(CMAKE_BUILD_TYPE)
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${CMAKE_CONFIGURATION_TYPES})
-else()
-    set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# Export compile commands (For some useful tools like YCM, Sourcetrail, ...)
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-
-# Initialize RPATH settings for shared library loading
-set(CMAKE_SKIP_BUILD_RPATH FALSE)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-
-# Utility paths
-set(UTIL_PATHS ${UTIL_PATHS} "${CMAKE_CURRENT_SOURCE_DIR}/test")
-
 # Set project
-project(${PROJECT_NAME} ${PROJECT_LANGUAGE})
+project(yoro_tutorial CXX)
 
-# Include cmake files
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps.cmake")
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake")
+# Find OpenCV
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+# Find YORO C++ API
+find_package(yoro_api REQUIRED)
+include_directories(${yoro_api_INCLUDE_DIRS})
+
+# Build C++ examples
+file(GLOB PROJECT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+foreach(FILE_PATH ${PROJECT_SRCS})
+
+    # Get each file name
+    get_filename_component(FILE_NAME ${FILE_PATH} NAME_WE)
+
+    # Build executable
+    add_executable(${FILE_NAME} ${FILE_PATH})
+    set_target_properties(${FILE_NAME} PROPERTIES
+        CXX_STANDARD 11
+        OUTPUT_NAME ${FILE_NAME}
+        )
+
+    # Link libraries
+    target_link_libraries(${FILE_NAME} yoro_api ${OpenCV_LIBS})
+
+    # Install
+    install(TARGETS ${FILE_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}")
+
+endforeach()
