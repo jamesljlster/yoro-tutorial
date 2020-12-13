@@ -63,6 +63,8 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
 
     ```cpp
     #include <yoro_api.hpp>
+
+    using namespace yoro_api;  // 後續將省略指定 yoro_api namespace
     ```
 
 -   Python
@@ -71,7 +73,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     from yoro import api
     ```
 
-##### DeviceType
+##### Device Type
 
 在後續載入 Detector 時，可以透過參數指定模型要載入在那一種裝置上：
 
@@ -83,7 +85,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   C++
 
         ```cpp
-        yoro_api::DeviceType::Auto
+        DeviceType::Auto
         ```
 
     -   Python
@@ -99,7 +101,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   C++
 
         ```cpp
-        yoro_api::DeviceType::CPU
+        DeviceType::CPU
         ```
 
     -   Python
@@ -115,7 +117,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   C++
 
         ```cpp
-        yoro_api::DeviceType::CUDA
+        DeviceType::CUDA
         ```
 
     -   Python
@@ -123,3 +125,95 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
         ```python
         api.DeviceType.CUDA
         ```
+
+##### YORO Detector
+
+1.  載入模型
+
+    檔案必須是已經匯出的 TorchScript Model。
+
+    -   建構函式界面：
+
+        -   C++
+
+            ```cpp
+            YORODetector::YORODetector(
+                const char* modelPath, const DeviceType& devType = DeviceType::Auto);
+            YORODetector::YORODetector(
+                const std::string& modelPath, const DeviceType& devType = DeviceType::Auto);
+            ```
+
+        -   Python
+
+            ```python
+            api.YORODetector(modelPath: str, devType: api.DeviceType)
+            ```
+
+    -   範例：
+
+        -   C++
+
+            ```cpp
+            YORODetector detector("model.zip", DeviceType::CUDA);
+            ```
+
+        -   Python
+
+            ```python
+            detector = api.YORODetector('model.zip', api.DeviceType.CUDA)
+            ```
+
+2.  偵測旋轉物件
+
+    此部份需要事先使用 OpenCV 載入影像，或是攝影機的影格，
+    Detector 會自動針對影像進行縮放、預處理。
+
+    -   函式界面：
+
+        -   C++
+
+            ```cpp
+            std::vector<RBox> YORODetector::detect(const cv::Mat& image, float confTh, float nmsTh);
+            ```
+
+        -   Python
+
+            ```python
+            api.YORODetector.detect(image: ndarray, confTh: float, nmsTh: float) -> List[api.RBox]
+            ```
+
+        其中 image 為目標偵測影像，confTh 與 nmsTh 則為 Non-Maximum Suppression 的參數。  
+        confTh 為 Confidence 過濾門檻，低於此門檻的預測旋轉框將被剔除。  
+        nmsTh 則為預選框的合併門檻，相似度低於此值的預選框將不被合併。
+
+    -   範例：
+
+        -   C++
+
+            ```cpp
+            #include <opencv2/opencv.hpp>  // 引入 OpenCV
+            using namespace cv;
+
+            Mat image = imread("image.jpg", IMREAD_COLOR);
+            std::vector<RBox> pred = detector.detect(image, 0.9, 0.7);
+            ```
+
+        -   Python
+
+            ```python
+            import cv2 as cv  # 載入 OpenCV 套件
+
+            image = cv.imread('image.jpg', cv.IMREAD_COLOR)
+            pred = detector.detect(image, 0.9, 0.7)
+            ```
+
+    預測結果將會以 RBox 的陣列回傳，RBox 本身為一種結構 (Struct) 資料型別，
+    欄位如下：
+
+    -   RBox.conf: Confidence (objectness \* class probability)
+    -   RBox.label: 類別ID
+    -   RBox.degree: 選轉角度 (Degree)
+    -   RBox.x: 中心 X 座標
+    -   RBox.y: 中心 Y 座標
+    -   RBox.w: 寬度
+    -   RBox.h: 高度
