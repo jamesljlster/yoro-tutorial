@@ -101,6 +101,8 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
 
 ##### YORO Detector
 
+此部份將介紹如何使用旋轉物件偵測模型。
+
 1.  載入模型
 
     檔案必須是已經匯出的 TorchScript Model。
@@ -192,3 +194,17 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   RBox.y: 中心 Y 座標
     -   RBox.w: 寬度
     -   RBox.h: 高度
+
+    完整範例：
+
+    -   C++: [demo_detector.cpp](demo_detector.cpp)
+    -   Python: [demo_detector.py](demo_detector.py)
+
+##### Rotation Detector
+
+RotationDetector 為單純的旋轉角度偵測器，建構方式與 YORODetector 所定義的參數相同，
+但在 detect() 函式中只需要帶入 image，且只會回傳一 float 純量。  
+詳細資訊請參考範例：
+
+-   C++: [demo_rotation_detector.cpp](demo_rotation_detector.cpp)
+-   Python: [demo_rotation_detector.py](demo_rotation_detector.py)
