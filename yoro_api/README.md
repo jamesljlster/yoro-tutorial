@@ -49,7 +49,7 @@ cmake --build . --target install
 > 註：YORO API 採用 Shared Library 的方式發布，
 > 透過 RPATH 設定可以免去在系統中指定 LD_LIBRARY_PATH 的問題，
 > 可參考本單元 CMakeLists.txt 中
-> Initialize RPATH settings for shared library loading 的寫法。
+> Initialize RPATH settings for shared library loading 的寫法。  
 > 更詳細的相關資訊請參考：
 > <https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling>
 
@@ -59,13 +59,17 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
 
 ##### 引入 API
 
-```cpp
-#include <yoro_api.hpp>
-```
+-   C++
 
-```python
-from yoro import api
-```
+    ```cpp
+    #include <yoro_api.hpp>
+    ```
+
+-   Python
+
+    ```python
+    from yoro import api
+    ```
 
 ##### DeviceType
 
@@ -76,34 +80,46 @@ from yoro import api
     使用預設裝置，程式會自動偵測系統是否有 CUDA 資源可以使用，
     若否則會使用 CPU 資源。
 
-    ```cpp
-    yoro_api::DeviceType::Auto
-    ```
+    -   C++
 
-    ```python
-    api.DeviceType.Auto
-    ```
+        ```cpp
+        yoro_api::DeviceType::Auto
+        ```
+
+    -   Python
+
+        ```python
+        api.DeviceType.Auto
+        ```
 
 -   CPU
 
     強制使用 CPU 資源。
 
-    ```cpp
-    yoro_api::DeviceType::CPU
-    ```
+    -   C++
 
-    ```python
-    api.DeviceType.CPU
-    ```
+        ```cpp
+        yoro_api::DeviceType::CPU
+        ```
+
+    -   Python
+
+        ```python
+        api.DeviceType.CPU
+        ```
 
 -   CUDA
 
     強制使用 CUDA 資源，如果 CUDA 資源不可用會丟 Exception。
 
-    ```cpp
-    yoro_api::DeviceType::CUDA
-    ```
+    -   C++
 
-    ```python
-    api.DeviceType.CUDA
-    ```
+        ```cpp
+        yoro_api::DeviceType::CUDA
+        ```
+
+    -   Python
+
+        ```python
+        api.DeviceType.CUDA
+        ```
