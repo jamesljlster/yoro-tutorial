@@ -82,22 +82,22 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     使用預設裝置，程式會自動偵測系統是否有 CUDA 資源可以使用，
     若否則會使用 CPU 資源。
 
-    -   C++: `cpp DeviceType::Auto`
-    -   Python: `python api.DeviceType.Auto`
+    -   C++: `DeviceType::Auto`
+    -   Python: `api.DeviceType.Auto`
 
 -   CPU
 
     強制使用 CPU 資源。
 
-    -   C++: `cpp DeviceType::CPU`
-    -   Python: `python api.DeviceType.CPU`
+    -   C++: `DeviceType::CPU`
+    -   Python: `api.DeviceType.CPU`
 
 -   CUDA
 
     強制使用 CUDA 資源，如果 CUDA 資源不可用會丟 Exception。
 
-    -   C++: `cpp DeviceType::CUDA`
-    -   Python: `python api.DeviceType.CUDA`
+    -   C++: `DeviceType::CUDA`
+    -   Python: `api.DeviceType.CUDA`
 
 ##### YORO Detector
 
