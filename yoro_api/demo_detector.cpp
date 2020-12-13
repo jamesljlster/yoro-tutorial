@@ -13,7 +13,7 @@ void draw_rbox(Mat& image, const RBox& rbox);
 int main(int argc, char* argv[])
 try
 {
-    // Check arguments
+    // Parse arguments
     if (argc < 3)
     {
         printf("Usage: %s <model_path> <test_image> [device]\n", argv[0]);
@@ -65,12 +65,11 @@ void draw_rbox(Mat& image, const RBox& rbox)
     RotatedRect rRect(
         Point2f(rbox.x, rbox.y), Size2f(rbox.w, rbox.h), -rbox.degree);
 
-    // Draw rotated bounding box
+    // Draw bounding box
     Point2f boxPts[4];
     rRect.points(boxPts);
     for (size_t i = 0; i < 4; i++)
     {
-        // Draw bounding box
         line(
             image,
             boxPts[i],
@@ -78,31 +77,31 @@ void draw_rbox(Mat& image, const RBox& rbox)
             Scalar(0, 128, 0),
             2,
             LINE_AA);
-
-        // Draw arrow
-        float length = rbox.h * 3 / 8;
-        float rad = (rbox.degree + 90) * 3.14159265358979323846 / 180;
-        Point ctr = Point((int)rbox.x, (int)rbox.y);
-        arrowedLine(
-            image,
-            ctr,
-            ctr + Point((int)(length * cos(rad)), (int)(-length * sin(rad))),
-            Scalar(192, 0, 0),
-            2,
-            LINE_AA,
-            0,
-            0.2);
-
-        // Draw label
-        float shift = rbox.h / 4;
-        putText(
-            image,
-            to_string(rbox.label),
-            ctr - Point((int)(shift * cos(rad)), (int)(-shift * sin(rad))),
-            FONT_HERSHEY_SIMPLEX,
-            0.7,
-            Scalar(0, 0, 0),
-            2,
-            LINE_AA);
     }
+
+    // Draw arrow
+    float length = rbox.h * 3 / 8;
+    float rad = (rbox.degree + 90) * 3.14159265358979323846 / 180;
+    Point ctr = Point((int)rbox.x, (int)rbox.y);
+    arrowedLine(
+        image,
+        ctr,
+        ctr + Point((int)(length * cos(rad)), (int)(-length * sin(rad))),
+        Scalar(192, 0, 0),
+        2,
+        LINE_AA,
+        0,
+        0.2);
+
+    // Draw label
+    float shift = rbox.h / 4;
+    putText(
+        image,
+        to_string(rbox.label),
+        ctr - Point((int)(shift * cos(rad)), (int)(-shift * sin(rad))),
+        FONT_HERSHEY_SIMPLEX,
+        0.7,
+        Scalar(0, 0, 0),
+        2,
+        LINE_AA);
 }
