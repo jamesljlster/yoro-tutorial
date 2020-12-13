@@ -10,6 +10,11 @@ endif()
 # Default installation path
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Installation directory")
 
+# Initialize RPATH settings for shared library loading
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 # Set project
 project(yoro_tutorial CXX)
 
