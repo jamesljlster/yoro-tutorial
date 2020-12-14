@@ -1,0 +1,45 @@
+mode: rotreg  # 使用 Anchor 編碼訓練角度辨識模型
+
+name: rotation_regressor
+device: auto
+
+# 模型建構參數
+construct:
+
+  # 輸入影像大小
+  width: 224
+  height: 224
+
+  # 角度編碼設定
+  deg_min: -45
+  deg_max: 45
+
+  # Backbone
+  backbone:
+    name: 'yoro.backbone.ResNet_Feature'
+    args: {model_name: resnet18}
+
+train_param:
+  max_epoch: 500
+  esti_epoch: 10
+  bak_epoch: 100
+  batch: 64
+  num_workers: 8
+  pin_memory: true
+  optimizer:
+    name: SGD
+    args: {'lr': 0.0001, 'momentum': 0.9}
+
+dataset:
+  names_file: ~/dataset/PlateShelf/data.names
+  train_dir: ~/dataset/PlateShelf/train
+  valid_dir: ~/dataset/PlateShelf/valid
+
+transform:
+  brightness: 0.3
+  contrast: 0.3
+  saturation: 0.3
+  hue: 0.1
+  translate: [0.3, 0.3]
+  scale: [0.7, 1.3]
+  apply_on_valid: false

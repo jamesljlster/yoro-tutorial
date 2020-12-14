@@ -1,0 +1,67 @@
+mode: yoro  # 指定訓練 YORO 模型
+
+name: coating  # 訓練 Task 名稱，Backup 資料夾、模型匯出名稱將以此為主
+device: auto   # 自動選擇訓練裝置
+
+# 模型建構參數
+construct:
+
+  # 輸入影像大小
+  width: 224
+  height: 224
+
+  # 物件長寬 Anchor，可使用 anchor_cluster 協助決定
+  anchor:
+    - [42.48, 45.48]  # 格式為 [width, height]，尺度須符合輸入影像大小
+    - [46.14, 34.85]
+
+  # 角度編碼設定
+  deg_min: -180      # 最小角度
+  deg_max: 180       # 最大角度
+  deg_part_size: 10  # 角度分割大小
+
+  # Backbone
+  backbone:
+    name: 'yoro.backbone.ResNet_FCN'
+    args: {model_name: resnet18}
+
+# 訓練參數
+train_param:
+  max_epoch: 30000  # 最大迭代次數
+  esti_epoch: 100   # 進行 Validation 驗證的迭代間隔
+  bak_epoch: 1000   # 進行備份的迭代間隔
+
+  # DataLoader 相關設定
+  batch: 16         # Batch size
+  num_workers: 8    # 使用多少 CPU Threads 進行資料處理
+  pin_memory: true  # 請參照 https://pytorch.org/docs/stable/data.html#memory-pinning
+
+  # 最佳化演算法，請參照 https://pytorch.org/docs/stable/optim.html
+  optimizer:
+    name: Adam  # 使用 Adam 演算法
+    args: {}    # 除了 params 會被自動指定之外，其餘參數皆可在此指定
+
+# 資料集路徑
+dataset:
+  names_file: ~/dataset/coating/coating.names
+  train_dir: ~/dataset/coating/train
+  valid_dir: ~/dataset/coating/valid
+
+# 資料擴增設定
+transform:
+
+  # 這些是有關於色彩擴增的參數，請參照
+  # https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ColorJitter
+  brightness: 0.3
+  contrast: 0.3
+  saturation: 0.3
+  hue: 0.1
+
+  # 這些是有關於形變的參數，由於 shear 會影響角度有效性因此不予設定，詳細資訊請參照
+  # https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.RandomAffine
+  degrees: 30            # 旋轉
+  translate: [0.3, 0.3]  # 位移
+  scale: [0.7, 1.3]      # 縮放
+
+  # 使否要在 Validation 進行資料擴增
+  apply_on_valid: false
