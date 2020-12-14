@@ -32,7 +32,7 @@ train_param:
   bak_epoch: 1000   # 進行備份的迭代間隔
 
   # DataLoader 相關設定
-  batch: 16         # Batch size
+  batch: 16         # Batch Size
   num_workers: 8    # 使用多少 CPU Threads 進行資料處理
   pin_memory: true  # 請參照 https://pytorch.org/docs/stable/data.html#memory-pinning
 
