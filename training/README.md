@@ -1,11 +1,14 @@
 # 訓練模型
 
+此部份需要在預先建置好的 Python 虛擬環境中執行。
+
 ### 訓練 YORO
 
 1.  使用 anchor_cluster 協助決定 Anchor
 
     anchor_cluster 會將資料集中的物件寬度、高度依據指定的尺度進行縮放之後，
-    進行 K-Means 分群。
+    進行 K-Means 分群。  
+    跳過這個步驟使用人工指定好的 Anchor 也行，訓練效果不見得會比較差。
 
     程式用法請參考：
 
