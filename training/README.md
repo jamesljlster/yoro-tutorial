@@ -63,14 +63,46 @@
 
 ##### 從 Backup 匯出模型
 
--   `backup_exporter`
+使用 backup_exporter 可從 trainer 產生的備份檔中匯出當下最佳權重的模型，
+需要以 Command Line 參數依序帶入訓練設定檔以及模型備份檔，
+程式用法請參考：
+
+```bash
+backup_exporter -h
+```
+
+範例：
+
+```bash
+backup_exporter coating.yaml coating.backup/epoch_30000.sdict
+```
 
 ##### 匯出 Pretrained Weight
 
--   `pretrain_exporter`
+pretrain_exporter 可自訓練備份檔或者 TorchScript Model 匯出 Pretrained Weight，
+程式用法請參考：
+
+```bash
+pretrain_exporter -h
+```
+
+範例：
+
+```bash
+# 自 TorchScript Model 匯出
+pretrain_exporter coating_epoch_30000.zip coating_pretrain.pth
+
+# 自 Backup 匯出
+pretrain_exporter coating.backup/epoch_30000.sdict coating_bak_pretrain.pth
+```
+
+匯出預訓練權重之後，可在訓練階段使用 --pretrain 參數指定給 trainer 使用，
+範例如下：
+
+```bash
+trainer coating.yaml --pretrain coating_pretrain.pth
+```
 
 ##### 簡易 Recall 模型
 
 -   `recaller`
-
-### Notes
