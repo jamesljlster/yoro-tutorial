@@ -103,6 +103,41 @@ pretrain_exporter coating.backup/epoch_30000.sdict coating_bak_pretrain.pth
 trainer coating.yaml --pretrain coating_pretrain.pth
 ```
 
-##### 簡易 Recall 模型
+### 訓練角度偵測器
 
--   `recaller`
+trainer 也提供角度偵測器訓練的功能，設定檔請參考：
+
+-   [rotation_anchor.yaml](rotation_anchor.yaml): 使用 Anchor 編碼訓練角度辨識模型
+-   [rotation_classifier.yaml](rotation_classifier.yaml): 使用分類法訓練角度辨識模型
+-   [rotation_regressor.yaml](rotation_regressor.yaml): 使用 Anchor 編碼訓練角度辨識模型
+
+設定檔內容除了不需要 Anchor 資訊，以及角度編碼設定有所不同之外，
+其餘內容皆與 YORO 訓練設定相同。
+
+### 測試模型效果
+
+匯出 TorchScript Model 之後，可使用 recaller 快速檢視模型訓練效果，
+程式用法請參考：
+
+```bash
+recaller -h
+```
+
+程式的第一個參數為模型的處理問題，選轉物件偵測填入 yoro，
+旋轉角度偵測則使用 rot 作為參數；
+第二個參數為 TorchScript Model 的檔案路徑；
+第三個參數則是輸入來源的類型，可使用 image 或 video 作為影像輸入來源，
+最後再填入影像路徑或是攝影機裝置路徑。  
+使用範例如下：
+
+```bash
+# 使用影像作為輸入
+recaller yoro coating_epoch_30000.zip image ~/dataset/coating/valid/CamToolbox_20200121_153827_1.jpg
+recaller rot rotation_anchor_epoch_500.zip image ~/dataset/PlateShelf/valid/0.jpg
+
+# 使用攝影機作為輸入
+recaller yoro coating_epoch_30000.zip video /dev/video0
+```
+
+在使用 yoro 模式下，
+recaller 可再帶入 `--conf 過濾門檻` 以及 `--nms 合併門檻` 進行測試。
