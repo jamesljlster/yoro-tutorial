@@ -82,7 +82,7 @@
 
         -   Ubuntu:
 
-              請參考<http://icl.cs.utk.edu/magma/software/>
+              請參考 <http://icl.cs.utk.edu/magma/software/>
 
         -   Manjaro:
 
@@ -125,7 +125,7 @@
         python setup.py install
         ```
 
-    3.  安裝 Torchvisiion
+    3.  安裝 Torchvision
 
         使用 Git Clone 指定版本的 Torchvision 專案，在此以 v0.8.1 為例：
 
