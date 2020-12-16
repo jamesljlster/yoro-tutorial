@@ -1,6 +1,7 @@
 # YORO Tutorial
 
-此專案為 <https://github.com/jamesljlster/yoro> 的文件專案。
+此專案為 <https://github.com/jamesljlster/yoro> 的文件專案，
+如果你喜歡我的作品，請給個星星：D
 
 目錄：
 
