@@ -2,6 +2,12 @@
 
 此部份需要在預先建置好的 Python 虛擬環境中執行。
 
+以下是與模型訓練有關的資源：
+
+-   [Backup](https://drive.google.com/drive/folders/15vtpOdRwMtrgu5LFhbna1MYRc5Lv4Jqe?usp=sharing)
+-   [TorchScript Model](https://drive.google.com/drive/folders/1wBb6WJygT2RiabJmpFMJ7KxMC-6urL_k?usp=sharing)
+-   [Pretrained Weight](https://drive.google.com/drive/folders/1uxYoTJOgOxobsAlW9wavW-VHmos-kOkK?usp=sharing)
+
 ### 訓練 YORO
 
 接下來介紹的是 YORO 模型的訓練流程：
