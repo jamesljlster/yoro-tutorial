@@ -57,6 +57,7 @@
     python3 -m venv venv
     source venv/bin/activate
     pip install --upgrade pip
+    pip install wheel
     ```
 
 3.  預先安裝 PyTorch (視環境狀況而定)
