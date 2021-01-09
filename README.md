@@ -10,3 +10,6 @@
 -   [2-training](2-training): 訓練模型
 -   [3-yoro_api](3-yoro_api): YORO C++/Python API
 -   [4-custom_backbone](4-custom_backbone): 自定模型 Backbone
+
+相關資源：\
+https://drive.google.com/drive/folders/1lwU0I8EH7rKkrpA9vvc0b6tzw9XxJt9L?usp=sharing
