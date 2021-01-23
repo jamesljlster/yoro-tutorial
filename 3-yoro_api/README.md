@@ -10,7 +10,7 @@ python export_yoro_dir.py  # 將 yoro_api_DIR 環境變數寫入 ~/.bashrc
 source ~/.bashrc           # 重新載入 ~/.bashrc
 ```
 
-### 編譯範例檔案
+## 編譯範例檔案
 
 在終端機中切換至此 README.md 所在的資料夾，並執行：
 
@@ -22,7 +22,7 @@ cmake --build . --target install
 
 編譯好的範例執行檔會出現在 install 資料夾中。
 
-### CMake 整合
+## CMake 整合
 
 這部份可能需要一些 CMake 的先備知識。
 
@@ -53,11 +53,11 @@ cmake --build . --target install
 > 更詳細的相關資訊請參考：
 > <https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling>
 
-### API 使用方式
+## API 使用方式
 
 Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制。
 
-##### 引入 API
+### 引入 API
 
 -   C++
 
@@ -73,7 +73,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     from yoro import api
     ```
 
-##### Device Type
+### Device Type
 
 在後續載入 Detector 時，可以透過參數指定模型要載入在那一種裝置上：
 
@@ -99,7 +99,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   C++: `DeviceType::CUDA`
     -   Python: `api.DeviceType.CUDA`
 
-##### YORO Detector
+### YORO Detector
 
 此部份將介紹如何使用旋轉物件偵測模型。
 
@@ -200,7 +200,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
     -   C++: [demo_detector.cpp](demo_detector.cpp)
     -   Python: [demo_detector.py](demo_detector.py)
 
-##### Rotation Detector
+### Rotation Detector
 
 RotationDetector 為單純的旋轉角度偵測器，建構方式與 YORODetector 所定義的參數相同，
 但在 detect() 函式中只需要帶入 image，且只會回傳一 float 純量。  

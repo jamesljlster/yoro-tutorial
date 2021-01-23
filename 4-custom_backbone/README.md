@@ -2,7 +2,7 @@
 
 此章節將介紹如何使用自訂的 Backbone 訓練 YORO 以及角度偵測器。  
 
-### 通則
+## 通則
 
 透過設定檔中的 construct / backbone 欄位可以指定該模型使用的 backbone，
 其中 name 為 backbone 模組的完整路徑，args 則是初始化該模組的所有參數。  
@@ -23,7 +23,7 @@ trainer 在讀取設定檔時，會自動將當前執行目錄加入 Python Path
 
 > 注意：自訂的 Backbone 需要相容於 TorchScript，否則會無法順利匯出模型。
 
-### 範例簡介
+## 範例簡介
 
 -   `demo_backbone.py`  
     此檔案內含自訂的 CNN 與 FCN 網路（基於 AlexNet 修改而來），

@@ -2,7 +2,7 @@
 
 此章節將介紹如何建立 YORO 專案所需要的執行環境。
 
-### 環境需求
+## 環境需求
 
 -   Python > 3.5:
 
@@ -37,7 +37,7 @@
     編譯安裝方法請參考：  
     <https://docs.opencv.org/4.5.0/d7/d9f/tutorial_linux_install.html>
 
-### 環境建置
+## 環境建置
 
 > 註1：Manjaro 使用者可直接使用 Native 環境，
 > 使用 pacman 安裝 python-pytorch-opt-cuda 套件，

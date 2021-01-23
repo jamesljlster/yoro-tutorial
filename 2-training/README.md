@@ -8,7 +8,7 @@
 -   [TorchScript Model](https://drive.google.com/drive/folders/1wBb6WJygT2RiabJmpFMJ7KxMC-6urL_k?usp=sharing)
 -   [Pretrained Weight](https://drive.google.com/drive/folders/1uxYoTJOgOxobsAlW9wavW-VHmos-kOkK?usp=sharing)
 
-### 訓練 YORO
+## 訓練 YORO
 
 接下來介紹的是 YORO 模型的訓練流程：
 
@@ -67,7 +67,7 @@
     trainer coating.yaml
     ```
 
-##### 從 Backup 匯出模型
+### 從 Backup 匯出模型
 
 使用 backup_exporter 可從 trainer 產生的備份檔中匯出當下最佳權重的模型，
 需要以 Command Line 參數依序帶入訓練設定檔以及模型備份檔，
@@ -83,7 +83,7 @@ backup_exporter -h
 backup_exporter coating.yaml coating.backup/epoch_30000.sdict
 ```
 
-##### 匯出 Pretrained Weight
+### 匯出 Pretrained Weight
 
 pretrain_exporter 可自訓練備份檔或者 TorchScript Model 匯出 Pretrained Weight，
 程式用法請參考：
@@ -109,7 +109,7 @@ pretrain_exporter coating.backup/epoch_30000.sdict coating_bak_pretrain.pth
 trainer coating.yaml --pretrain coating_pretrain.pth
 ```
 
-### 訓練角度偵測器
+## 訓練角度偵測器
 
 trainer 也提供角度偵測器訓練的功能，設定檔請參考：
 
@@ -120,7 +120,7 @@ trainer 也提供角度偵測器訓練的功能，設定檔請參考：
 設定檔內容除了不需要 Anchor 資訊，以及角度編碼設定有所不同之外，
 其餘內容皆與 YORO 訓練設定相同。
 
-### 測試模型效果
+## 測試模型效果
 
 匯出 TorchScript Model 之後，可使用 recaller 快速檢視模型訓練效果，
 程式用法請參考：

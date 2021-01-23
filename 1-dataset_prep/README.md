@@ -7,7 +7,7 @@
 -   [coating 旋轉物件資料集](https://drive.google.com/file/d/1FBhiYQWKvWbFCb3NXIB5D8G7X6xrV0XX/view?usp=sharing)
 -   [PlateShelf 旋轉角度資料集](https://drive.google.com/file/d/13KLxya8XHXKYWKNs-0ybg0xYtW50wXSq/view?usp=sharing)
 
-### 資料集格式
+## 資料集格式
 
 YORO 專案採用的資料標記模式為一張影像搭配一個標注檔，
 檔案名稱為 `完整影像名稱.mark`，檔案內容使用 YAML 格式。  
@@ -56,7 +56,7 @@ YORO 專案採用的資料標記模式為一張影像搭配一個標注檔，
 - dog
 ```
 
-### 準備資料標記程式
+## 準備資料標記程式
 
 ican_mark 提供搭配鍵盤與滑鼠標記資料的功能：  
 <https://github.com/jamesljlster/ican_mark>
@@ -79,7 +79,7 @@ cmake --build . --target install
 
 編譯完成後，ican_mark 執行檔預設會安裝於 build/install/bin 目錄下。
 
-### 標記資料
+## 標記資料
 
 首先蒐集訓練即驗證影像資料，並為自己的資料集準備好類別名稱列表，
 在此以 coating 資料集作為範例。
