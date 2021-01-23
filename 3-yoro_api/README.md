@@ -189,7 +189,7 @@ Python API 需要在事先設定的虛擬環境中執行，C++ 則無此限制�
 
     -   RBox.conf: Confidence (objectness \* class probability)
     -   RBox.label: 類別ID
-    -   RBox.degree: 選轉角度 (Degree)
+    -   RBox.degree: 旋轉角度 (Degree)
     -   RBox.x: 中心 X 座標
     -   RBox.y: 中心 Y 座標
     -   RBox.w: 寬度
