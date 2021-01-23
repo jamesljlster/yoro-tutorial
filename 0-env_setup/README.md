@@ -23,9 +23,10 @@
     ```
 
 -   CUDA Toolkit:
-
-    需要與後續 PyTorch 安裝版本所對應的一致：  
     <https://developer.nvidia.com/CUDA-TOOLKIT-ARCHIVE>
+
+-   cuDNN:
+    <https://developer.nvidia.com/CUDNN>
 
 -   CMake > 3.17:
 
@@ -60,12 +61,10 @@
     pip install wheel
     ```
 
-3.  預先安裝 PyTorch (視環境狀況而定)
+3.  預先安裝 PyTorch
 
-    如果依照官網 <https://pytorch.org/> 指示安裝完 PyTorch，
-    並依照第 4、5 步驟安裝、測試 YORO API 之後不會出現任何錯誤，
-    則可以跳過手動編譯安裝的部份。
-
+    由於 PyTorch 官方提供的套件使用舊的 C++ ABI，
+    因此需要自行編譯相容於系統環境的 PyTorch。  
     此步驟需要在 Python 虛擬環境中執行，可參考官方作法：  
     <https://github.com/pytorch/pytorch>
 
@@ -115,13 +114,6 @@
         編譯及安裝：
 
         ```bash
-        pip install .  # -v for verbose
-        ```
-
-        或是使用以下方法，當編譯失敗之後不需要重頭編譯，
-        但需要保留 pytorch 專案資料夾：
-
-        ```bash
         python setup.py build
         python setup.py install
         ```
@@ -140,7 +132,7 @@
         編譯安裝套件：
 
         ```bash
-        pip install .  # -v for verbose
+        python setup.py install
         ```
 
 4.  編譯、安裝 YORO 套件
@@ -151,7 +143,7 @@
     git clone https://github.com/jamesljlster/yoro.git
     cd yoro
 
-    pip install .  # -v for verbose
+    pip install -v .
     ```
 
 5.  測試環境
