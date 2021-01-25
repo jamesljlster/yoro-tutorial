@@ -22,10 +22,12 @@
     sudo apt install g++
     ```
 
--   CUDA Toolkit:
-    <https://developer.nvidia.com/CUDA-TOOLKIT-ARCHIVE>
+-   CUDA Toolkit & cuDNN:
 
--   cuDNN:
+    如果希望 PyTorch 能夠使用 CUDA 與 cuDNN 加速，
+    則需要安裝 CUDA 與 cuDNN 的 Development 套件：
+
+    <https://developer.nvidia.com/CUDA-TOOLKIT-ARCHIVE>  
     <https://developer.nvidia.com/CUDNN>
 
 -   CMake > 3.17:
@@ -34,6 +36,7 @@
 
 -   OpenCV > 4.0:
 
+    編譯時需注意要啟用 GTK 或 Qt 的支援，否則會無法開啟視窗界面，
     編譯安裝方法請參考：  
     <https://docs.opencv.org/4.5.0/d7/d9f/tutorial_linux_install.html>
 
