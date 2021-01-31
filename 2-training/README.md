@@ -4,29 +4,29 @@
 
 以下是與模型訓練有關的資源：
 
--   [Backup](https://drive.google.com/drive/folders/15vtpOdRwMtrgu5LFhbna1MYRc5Lv4Jqe?usp=sharing)
--   [TorchScript Model](https://drive.google.com/drive/folders/1wBb6WJygT2RiabJmpFMJ7KxMC-6urL_k?usp=sharing)
--   [Pretrained Weight](https://drive.google.com/drive/folders/1uxYoTJOgOxobsAlW9wavW-VHmos-kOkK?usp=sharing)
+-   [Backup][]
+-   [TorchScript Model][]
+-   [Pretrained Weight][]
 
 ## 訓練 YORO
 
 接下來介紹的是 YORO 模型的訓練流程：
 
-1.  使用 anchor_cluster 協助決定 Anchor
+1.  使用 anchor\_cluster 協助決定 Anchor
 
-    anchor_cluster 會將資料集中的物件寬度、高度依據指定的尺度進行縮放之後，
+    anchor\_cluster 會將資料集中的物件寬度、高度依據指定的尺度進行縮放之後，
     進行 K-Means 分群。  
     跳過這個步驟使用人工指定好的 Anchor 也行，訓練效果不見得會比較差。
 
     程式用法請參考：
 
-    ```bash
+    ``` bash
     anchor_cluster -h
     ```
 
     範例：
 
-    ```bash
+    ``` bash
     anchor_cluster ~/dataset/coating/train 2 --width 224 --height 224
     ```
 
@@ -45,14 +45,14 @@
 2.  配置訓練設定檔
 
     上一步所取得的 Anchor 資訊可套用在 contruct / anchor 設定中，
-    查看 [coating.yaml](coating.yaml) 以了解詳細配置。
+    查看 [coating.yaml][] 以了解詳細配置。
 
 3.  訓練模型
 
     trainer 可搭配指定的設定檔以及 Command Line 參數進行模型訓練，
     程式用法請參考：
 
-    ```bash
+    ``` bash
     trainer -h
     ```
 
@@ -63,38 +63,38 @@
 
     範例：
 
-    ```bash
+    ``` bash
     trainer coating.yaml
     ```
 
 ### 從 Backup 匯出模型
 
-使用 backup_exporter 可從 trainer 產生的備份檔中匯出當下最佳權重的模型，
+使用 backup\_exporter 可從 trainer 產生的備份檔中匯出當下最佳權重的模型，
 需要以 Command Line 參數依序帶入訓練設定檔以及模型備份檔，
 程式用法請參考：
 
-```bash
+``` bash
 backup_exporter -h
 ```
 
 範例：
 
-```bash
+``` bash
 backup_exporter coating.yaml coating.backup/epoch_30000.sdict
 ```
 
 ### 匯出 Pretrained Weight
 
-pretrain_exporter 可自訓練備份檔或者 TorchScript Model 匯出 Pretrained Weight，
+pretrain\_exporter 可自訓練備份檔或者 TorchScript Model 匯出 Pretrained Weight，
 程式用法請參考：
 
-```bash
+``` bash
 pretrain_exporter -h
 ```
 
 範例：
 
-```bash
+``` bash
 # 自 TorchScript Model 匯出
 pretrain_exporter coating_epoch_30000.zip coating_pretrain.pth
 
@@ -102,10 +102,10 @@ pretrain_exporter coating_epoch_30000.zip coating_pretrain.pth
 pretrain_exporter coating.backup/epoch_30000.sdict coating_bak_pretrain.pth
 ```
 
-匯出預訓練權重之後，可在訓練階段使用 --pretrain 參數指定給 trainer 使用，
+匯出預訓練權重之後，可在訓練階段使用 –pretrain 參數指定給 trainer 使用，
 範例如下：
 
-```bash
+``` bash
 trainer coating.yaml --pretrain coating_pretrain.pth
 ```
 
@@ -113,9 +113,9 @@ trainer coating.yaml --pretrain coating_pretrain.pth
 
 trainer 也提供角度偵測器訓練的功能，設定檔請參考：
 
--   [rotation_anchor.yaml](rotation_anchor.yaml): 使用 Anchor 編碼訓練角度辨識模型
--   [rotation_classifier.yaml](rotation_classifier.yaml): 使用分類法訓練角度辨識模型
--   [rotation_regressor.yaml](rotation_regressor.yaml): 使用 Anchor 編碼訓練角度辨識模型
+-   [rotation\_anchor.yaml][]: 使用 Anchor 編碼訓練角度辨識模型
+-   [rotation\_classifier.yaml][]: 使用分類法訓練角度辨識模型
+-   [rotation\_regressor.yaml][]: 使用 Anchor 編碼訓練角度辨識模型
 
 設定檔內容除了不需要 Anchor 資訊，以及角度編碼設定有所不同之外，
 其餘內容皆與 YORO 訓練設定相同。
@@ -125,7 +125,7 @@ trainer 也提供角度偵測器訓練的功能，設定檔請參考：
 匯出 TorchScript Model 之後，可使用 recaller 快速檢視模型訓練效果，
 程式用法請參考：
 
-```bash
+``` bash
 recaller -h
 ```
 
@@ -136,7 +136,7 @@ recaller -h
 最後再填入影像路徑或是攝影機裝置路徑。  
 使用範例如下：
 
-```bash
+``` bash
 # 使用影像作為輸入
 recaller yoro coating_epoch_30000.zip image ~/dataset/coating/valid/CamToolbox_20200121_153827_1.jpg
 recaller rot rotation_anchor_epoch_500.zip image ~/dataset/PlateShelf/valid/0.jpg
@@ -147,3 +147,30 @@ recaller yoro coating_epoch_30000.zip video /dev/video0
 
 在使用 yoro 模式下，
 recaller 可再帶入 `--conf 過濾門檻` 以及 `--nms 合併門檻` 進行測試。
+
+### mAP 評估
+
+另有 `map_evaluator` 可針對 YORO 模型進行 mean Average Precision (mAP) 評估，
+用法請參考：
+
+``` bash
+map_evaluator -h
+```
+
+程式的第一個參數為 YORO 模型路徑，第二個參數為資料集的路徑。
+可選參數的部份，使用 `--conf` 可指定過濾門檻；`-–nms` 可指定預測框合併門檻；
+`–sim` 則為進行 mAP 計算時，預測框與 Ground Truth 的相似度門檻。
+
+使用範例：
+
+``` bash
+map_evaluator coating_epoch_30000.zip ~/dataset/coating/valid --conf 0.9 --nms 0.7 --sim 0.75
+```
+
+  [Backup]: https://drive.google.com/drive/folders/15vtpOdRwMtrgu5LFhbna1MYRc5Lv4Jqe?usp=sharing
+  [TorchScript Model]: https://drive.google.com/drive/folders/1wBb6WJygT2RiabJmpFMJ7KxMC-6urL_k?usp=sharing
+  [Pretrained Weight]: https://drive.google.com/drive/folders/1uxYoTJOgOxobsAlW9wavW-VHmos-kOkK?usp=sharing
+  [coating.yaml]: coating.yaml
+  [rotation\_anchor.yaml]: rotation_anchor.yaml
+  [rotation\_classifier.yaml]: rotation_classifier.yaml
+  [rotation\_regressor.yaml]: rotation_regressor.yaml
